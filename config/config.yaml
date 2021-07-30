@@ -1,0 +1,29 @@
+# how often to check stock (seconds)
+REFRESH_INTERVAL: 60
+
+# path to local chromedriver
+WINDOWS_PATH: 'C:/bin/chromedriver.exe'
+
+# stores to check stock for
+stores_to_check: [
+    'Kanata',
+    'Downtown Ottawa',
+    'Ottawa Orleans',
+    'Ottawa Merivale',
+    # 'Markham',
+    # 'London'
+    ]
+
+# Selection of desired card from CARD_TYPE_DIC below    
+CARD_TYPE: '3060 Ti, 3070, 3070 Ti'
+
+# Key-Value pairs for relevant urls
+CARD_TYPE_DIC: {
+  '3060': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_9&mfr=&pr=',
+  '3060 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_8&mfr=&pr=',
+  '3070': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_7&mfr=&pr=',
+  '3070 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_6&mfr=&pr=',
+  '3060 + 3060 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_8,3_9&mfr=&pr=',
+  '3070 + 3070 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_6,3_7&mfr=&pr=',
+  '3060 Ti, 3070, 3070 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_6,3_7,3_8&mfr=&pr='
+}
