@@ -1,5 +1,5 @@
 # how often to check stock (seconds)
-REFRESH_INTERVAL: 60
+REFRESH_INTERVAL: 15
 
 # path to local chromedriver
 WINDOWS_PATH: 'C:/bin/chromedriver.exe'

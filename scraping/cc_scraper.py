@@ -88,7 +88,7 @@ def scrape_canada_computers(driver):
                     driver.execute_script("arguments[0].setAttribute('class','stocklevel-pop d-block')", other_stores)
 
                     stock_dic[rtx_card]["store location"] = "online only"
-                    stock_dic[rtx_card]["stock"] = 0
+                    stock_dic[rtx_card]["stock"] = 'n/a'
 
                     for store in stores_to_check:
                         store_element = driver.find_element_by_link_text(store)
@@ -100,8 +100,6 @@ def scrape_canada_computers(driver):
                         if stock > 0:
                             stock_dic[rtx_card]["stock"] = stock
                             if "store location" in stock_dic[rtx_card]:
-                                stock_dic[rtx_card]["store location"] += f", {store}"
-                            else:
                                 stock_dic[rtx_card]["store location"] = store
 
     return stock_dic
