@@ -75,6 +75,7 @@ def scrape_canada_computers(driver):
             rtx_card = driver.title.rstrip("| Canada Computers & Electronics")
             stock_dic[rtx_card] = {}
             stock_dic[rtx_card]["url"] = URL
+            stock_dic[rtx_card]['card name'] = rtx_card
             driver.implicitly_wait(.1)
             this = driver.find_elements_by_class_name("h2-big")
             stock_dic[rtx_card]["price"] = driver.find_elements_by_class_name("h2-big")[0].text
@@ -86,7 +87,7 @@ def scrape_canada_computers(driver):
                     other_stores = driver.find_element_by_css_selector(".stocklevel-pop")
                     driver.execute_script("arguments[0].setAttribute('class','stocklevel-pop d-block')", other_stores)
 
-                    stock_dic[rtx_card]["in store status"] = "online only"
+                    stock_dic[rtx_card]["store location"] = "online only"
                     stock_dic[rtx_card]["stock"] = 0
 
                     for store in stores_to_check:
@@ -98,7 +99,6 @@ def scrape_canada_computers(driver):
                             stock = int(stock[0:1])  # Truncates where x+ --> x
                         if stock > 0:
                             stock_dic[rtx_card]["stock"] = stock
-                            stock_dic[rtx_card]["in store status"] = "In store"
                             if "store location" in stock_dic[rtx_card]:
                                 stock_dic[rtx_card]["store location"] += f", {store}"
                             else:
@@ -115,7 +115,7 @@ def generate_text_body(stock_dic):
     """
     stock_summary = []
     for item, details in stock_dic.items():
-        if details["in store status"] == "In store":
+        if details["stock"] != -1:
             # stock_summary.append(f"{item} is in stock IN STORE at Canada Computers for {details['price']}\n"
             stock_summary.append(f"{item}\n"
                                  f"{details['store location']}\n"
