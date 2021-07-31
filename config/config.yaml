@@ -27,3 +27,21 @@ CARD_TYPE_DIC: {
   '3070 + 3070 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_6,3_7&mfr=&pr=',
   '3060 Ti, 3070, 3070 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_6,3_7,3_8&mfr=&pr='
 }
+
+# Sample dic for offline testing
+stock_dic: {
+     "PNY GeForce RTX 3070 8GB XLR8 Gaming REVEL EPIC-X RGB Triple F":{
+        "url":"https://www.canadacomputers.com/product_info.php?cPath=43_557_559&item_id=193053&sid=f1jbh3voqgfbbt2aql6tbuopj2",
+        "card name":"PNY GeForce RTX 3070 8GB XLR8 Gaming REVEL EPIC-X RGB Triple F",
+        "price":"$1,399.00",
+        "store location":"online only",
+        "stock":'n/a'
+     },
+     "ZOTAC GAMING GeForce RTX 3060 Ti Twin Edge OC LHR 8GB GDDR6 1695 MHz 3 DP+HDMI ZT-A30610H-10MLHR":{
+        "url":"https://www.canadacomputers.com/product_info.php?cPath=43_557_559&item_id=196048&sid=f1jbh3voqgfbbt2aql6tbuopj2",
+        "card name":"ZOTAC GAMING GeForce RTX 3060 Ti Twin Edge OC LHR 8GB GDDR6 1695 MHz 3 DP+HDMI ZT-A30610H-10MLHR",
+        "price":"$849.00",
+        "store location":"Kanata",
+        "stock":1
+     }
+  }

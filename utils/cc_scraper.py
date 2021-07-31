@@ -13,6 +13,7 @@ import requests
 import os
 import sys
 import yaml
+from datetime import datetime
 
 
 def get_driver():
@@ -59,7 +60,7 @@ def scrape_canada_computers(driver):
         listing_info = listing.find_element_by_xpath("following-sibling::div[1]")
         try:
             driver.implicitly_wait(0.01)
-            item_URL = ((listing_info.find_element_by_class_name("productImageSearch")).find_element_by_tag_name("a")).get_attribute("href")
+            item_URL = ((listing_info.find_element_by_class_name("productImageSearch")).find_element_by_tag_name('a')).get_attribute("href")
             stock_status_element = listing_info.find_elements_by_class_name('pq-hdr-bolder')
             if len(stock_status_element) != 0:
                 canada_computer_urls.append(item_URL)
@@ -74,7 +75,7 @@ def scrape_canada_computers(driver):
         for elements in driver.find_elements_by_class_name('pi-prod-availability'):
             rtx_card = driver.title.rstrip("| Canada Computers & Electronics")
             stock_dic[rtx_card] = {}
-            stock_dic[rtx_card]["url"] = URL
+            stock_dic[rtx_card]['url'] = URL
             stock_dic[rtx_card]['card name'] = rtx_card
             driver.implicitly_wait(.1)
             this = driver.find_elements_by_class_name("h2-big")
@@ -82,25 +83,26 @@ def scrape_canada_computers(driver):
 
             # Check local store stock
             if len(stores_to_check) != 0:
-                if "Available In Stores" in elements.text:
+                if 'Available In Stores' in elements.text:
                     # Opens inventory view for all stores
                     other_stores = driver.find_element_by_css_selector(".stocklevel-pop")
                     driver.execute_script("arguments[0].setAttribute('class','stocklevel-pop d-block')", other_stores)
 
-                    stock_dic[rtx_card]["store location"] = "online only"
-                    stock_dic[rtx_card]["stock"] = 'n/a'
+                    stock_dic[rtx_card]['store location'] = 'online only'
+                    stock_dic[rtx_card]['stock'] = 'n/a'
 
                     for store in stores_to_check:
                         store_element = driver.find_element_by_link_text(store)
                         stock = store_element.find_element_by_xpath('./../../../div[2]/div/p/span').text
-                        if stock == "-":
+                        if stock == '-':
                             stock = 0
                         else:
                             stock = int(stock[0:1])  # Truncates where x+ --> x
                         if stock > 0:
-                            stock_dic[rtx_card]["stock"] = stock
-                            if "store location" in stock_dic[rtx_card]:
-                                stock_dic[rtx_card]["store location"] = store
+                            stock_dic[rtx_card]['stock'] = stock
+                            if 'store location' in stock_dic[rtx_card]:
+                                stock_dic[rtx_card]['store location'] = store
+                        stock_dic[rtx_card]['check_date'] = datetime.now().strftime("%d-%b %H:%M:%S")
 
     return stock_dic
 
@@ -113,7 +115,7 @@ def generate_text_body(stock_dic):
     """
     stock_summary = []
     for item, details in stock_dic.items():
-        if details["stock"] != -1:
+        if details['stock'] != -1:
             # stock_summary.append(f"{item} is in stock IN STORE at Canada Computers for {details['price']}\n"
             stock_summary.append(f"{item}\n"
                                  f"{details['store location']}\n"
@@ -122,7 +124,7 @@ def generate_text_body(stock_dic):
                                  f"{details['url']}\n\n"
                                  )                      
 
-    text_body = ""
+    text_body = ''
     for hits in stock_summary:
         text_body += hits
 
@@ -130,8 +132,8 @@ def generate_text_body(stock_dic):
 
 
 def get_yaml():
-    with open("./config/config.yaml", 'r') as stream:
-    # with open("../config/config.yaml", 'r') as stream: # if running here
+    with open('./config/config.yaml', 'r') as stream:
+    # with open('../config/config.yaml', 'r') as stream: # if running here
         try:
             conf = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
