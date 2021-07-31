@@ -17,18 +17,14 @@ logging.basicConfig(format='%(asctime)s - %(message)s',
                     )
 logging.getLogger().setLevel(logging.INFO)
 
-def get_stock_dic():
-    cc.get_yaml()
-    driver = cc.get_driver()
-    stock_dic = cc.scrape_canada_computers(driver)
 
-    driver.quit()
-    return stock_dic
+logging.info('Canada Computers RTX Tracking Bot Started')
 
-logging.info('CC RTX Tracking Bot Started')
-nexttime = time.time()
-current_stock = get_stock_dic()
 
+# get current stock
+current_stock = cc.get_stock_dic()
+
+# print current stock
 if current_stock:
     logging.info('CARD FOUND!')
     logging.info(cc.generate_text_body(current_stock))
@@ -36,14 +32,16 @@ if current_stock:
 else:
     logging.info('No cards in stock.')
 
+# check stock at recurring interval
+nexttime = time.time()
 while True:
-    new_stock = get_stock_dic()
+    new_stock = cc.get_stock_dic()
     if current_stock != new_stock:
         logging.info('CARD FOUND!')
         logging.info(cc.generate_text_body(current_stock))
         dis.send_discord_message(new_stock)
     else:
-        logging.info('No cards in stock. Trying again in 120 seconds')
+        logging.info('No change to stock')
     nexttime += 120
     sleeptime = nexttime - time.time()
     if sleeptime > 0:

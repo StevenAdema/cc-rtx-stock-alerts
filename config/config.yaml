@@ -1,5 +1,5 @@
 # how often to check stock (seconds)
-REFRESH_INTERVAL: 15
+REFRESH_INTERVAL: 120
 
 # path to local chromedriver
 WINDOWS_PATH: 'C:/bin/chromedriver.exe'
@@ -31,7 +31,7 @@ CARD_TYPE_DIC: {
 
 
 # Optional: Send Discord Message to a specified channel
-WEBHOOK: 'https://discord.com/api/webhooks/870787019197022209/h2voWBfA3r0zrHpubZ2jOJwOYZJ8TDJeAgABtkOOzPmELZQ4D5KHXEOYFc1OEVgrUZo3'
+WEBHOOK: ''
 
 # Sample dic for offline testing
 current_stock: {

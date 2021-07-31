@@ -144,3 +144,12 @@ def get_yaml():
     globals().update(conf)
 
     return conf
+
+
+def get_stock_dic():
+    get_yaml()
+    driver = get_driver()
+    stock_dic = scrape_canada_computers(driver)
+    driver.quit()
+    
+    return stock_dic
