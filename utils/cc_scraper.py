@@ -103,6 +103,8 @@ def scrape_canada_computers(driver):
                             if 'store location' in stock_dic[rtx_card]:
                                 stock_dic[rtx_card]['store location'] = store
                         stock_dic[rtx_card]['check_date'] = datetime.now().strftime("%d-%b %H:%M:%S")
+            if stock_dic[rtx_card]['store location'] not in stores_to_check:
+                stock_dic.pop(rtx_card)
 
     return stock_dic
 
@@ -117,11 +119,12 @@ def generate_text_body(stock_dic):
     for item, details in stock_dic.items():
         if details['stock'] != -1:
             # stock_summary.append(f"{item} is in stock IN STORE at Canada Computers for {details['price']}\n"
-            stock_summary.append(f"{item}\n"
+            stock_summary.append(f"\n"
+                                 f"{item}\n"
                                  f"{details['store location']}\n"
                                  f"{details['price']}\n"
                                  f"{details['stock']} in stock\n"
-                                 f"{details['url']}\n\n"
+                                 f"{details['url']}\n"
                                  )                      
 
     text_body = ''

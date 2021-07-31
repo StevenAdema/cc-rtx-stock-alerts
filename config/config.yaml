@@ -10,6 +10,7 @@ stores_to_check: [
     'Downtown Ottawa',
     'Ottawa Orleans',
     'Ottawa Merivale',
+    # 'Richmond'
     # 'Markham',
     # 'London'
     ]
@@ -28,8 +29,12 @@ CARD_TYPE_DIC: {
   '3060 Ti, 3070, 3070 Ti': 'https://www.canadacomputers.com/index.php?cPath=43_557_559&sf=:3_6,3_7,3_8&mfr=&pr='
 }
 
+
+# Optional: Send Discord Message to a specified channel
+WEBHOOK: 'https://discord.com/api/webhooks/870787019197022209/h2voWBfA3r0zrHpubZ2jOJwOYZJ8TDJeAgABtkOOzPmELZQ4D5KHXEOYFc1OEVgrUZo3'
+
 # Sample dic for offline testing
-stock_dic: {
+current_stock: {
      "PNY GeForce RTX 3070 8GB XLR8 Gaming REVEL EPIC-X RGB Triple F":{
         "url":"https://www.canadacomputers.com/product_info.php?cPath=43_557_559&item_id=193053&sid=f1jbh3voqgfbbt2aql6tbuopj2",
         "card name":"PNY GeForce RTX 3070 8GB XLR8 Gaming REVEL EPIC-X RGB Triple F",
